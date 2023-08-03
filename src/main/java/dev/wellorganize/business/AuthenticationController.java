@@ -1,34 +1,30 @@
 package dev.wellorganize.business;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AuthenticationController {
 
-    private final UserRepository userRepository;
-
-    public AuthenticationController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private UserRepository userRepository; // Assuming you have a UserRepository interface to interact with MongoDB
 
     @PostMapping("/signin")
     public ResponseEntity<String> signIn(@RequestBody SignInRequest signInRequest) {
         String username = signInRequest.getUsername();
         String password = signInRequest.getPassword();
 
-        // Logic to verify the username and password against the data from MongoDB
-        // You can use the UserRepository to retrieve the user data and check if the
-        // provided credentials match the data in the database.
+        // Retrieve the user document based on the provided username from MongoDB
+        User user = userRepository.findByUsername(username);
 
-        return ResponseEntity.ok("Sign-in successful!");
-    }
+        if (user != null && user.getPassword().equals(password)) {
+            return ResponseEntity.ok("Sign-in successful!");
+        }
 
-    public UserRepository getUserRepository() {
-        return userRepository;
+        // Return an error response for failed sign-in
+        return ResponseEntity.status(401).body("Wrong username or password");
     }
 }
