@@ -8,11 +8,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
 public class VisitRequestController {
     @Autowired
     private VisitRequestRepository visitRequestRepository;
 
-//    List<VisitRequest> pendingRequests = visitRequestRepository.findByStatus("Pending");
+//    List<VisitRequest> pendingRequests = visitRequestRepository.findByStatus("Pending");'
     @PostMapping("/visit-requests")
     public ResponseEntity<VisitRequest> createVisitRequest(@RequestBody VisitRequest visitRequest) {
         VisitRequest savedRequest = visitRequestRepository.save(visitRequest);

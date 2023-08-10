@@ -8,13 +8,19 @@ public class VisitRequest {
     @Id
     private String id;
     private String customerName;
+    private String companyName;
+    private String addresses;
     private String date;
+    private String type;
     private String status;
     private boolean canceled;
 
     public VisitRequest() {
         this.customerName = "";
+        this.companyName = "";
+        this.addresses = "";
         this.date = "";
+        this.type = "";
         this.status = "";
         this.canceled = false;
     }
@@ -51,5 +57,27 @@ public class VisitRequest {
         this.canceled = canceled;
     }
 
-    // Getters and setters
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getAddress() {
+        return addresses;
+    }
+
+    public void setAddress(String address) {
+        this.addresses = address;
+    }
 }
