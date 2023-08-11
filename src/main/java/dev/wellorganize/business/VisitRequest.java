@@ -77,7 +77,7 @@ public class VisitRequest {
         return addresses;
     }
 
-    public void setAddress(String address) {
-        this.addresses = address;
+    public void setAddress(String addresses) {
+        this.addresses = addresses;
     }
 }
