@@ -13,7 +13,10 @@ public class VisitRequestController {
     @Autowired
     private VisitRequestRepository visitRequestRepository;
 
-//    List<VisitRequest> pendingRequests = visitRequestRepository.findByStatus("Pending");'
+    public VisitRequestController(VisitRequestRepository visitRequestRepository) {
+        this.visitRequestRepository = visitRequestRepository;
+    }
+
     @PostMapping("/visit-requests")
     public ResponseEntity<VisitRequest> createVisitRequest(@RequestBody VisitRequest visitRequest) {
         VisitRequest savedRequest = visitRequestRepository.save(visitRequest);
